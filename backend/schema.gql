@@ -1,0 +1,28 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Product {
+  id: ID!
+  name: String!
+  description: String!
+  isActive: Boolean!
+}
+
+type ProductCreateOutput {
+  product: Product!
+}
+
+type Query {
+  sayHello: String!
+}
+
+type Mutation {
+  productCreate(input: ProductCreateInput!): ProductCreateOutput!
+}
+
+input ProductCreateInput {
+  name: String!
+  description: String!
+  isActive: Boolean!
+}
