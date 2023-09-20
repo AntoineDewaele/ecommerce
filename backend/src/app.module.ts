@@ -1,11 +1,10 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductsModule } from './products/products.module';
-import { Product } from './products/models/product.model';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
-import {AppResolver} from "./app.resolver";
+import { AppResolver } from './app.resolver';
 
 @Module({
   imports: [

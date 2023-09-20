@@ -15,6 +15,6 @@ export class ProductCreateInput {
 
 @ObjectType()
 export class ProductCreateOutput {
-  @Field(() => Product)
-  product: Product;
+  @Field(() => Product, { nullable: true })
+  product?: Product;
 }
