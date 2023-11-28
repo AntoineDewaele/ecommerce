@@ -17,7 +17,9 @@ export class ProductMutationsResolver {
 
   @Mutation(() => ProductCreateOutput)
   async productCreate(@Args('input') input: ProductCreateInput) {
-    return this.productService.create(input);
+    let product = await this.productService.create(input);
+
+    return product;
   }
 
   @Mutation(() => ProductUpdateOutput)

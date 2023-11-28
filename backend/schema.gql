@@ -13,6 +13,15 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type ProductImage {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  url: String!
+  isActive: Boolean!
+  product: Product!
+}
+
 type Product {
   id: ID!
   createdAt: DateTime!
@@ -20,6 +29,7 @@ type Product {
   name: String!
   description: String!
   isActive: Boolean!
+  images: [ProductImage!]!
 }
 
 type ProductCreateOutput {
@@ -65,10 +75,16 @@ input ProductCreateInput {
   name: String!
   description: String!
   isActive: Boolean!
+  images: [ProductImageCreateInput!]
+}
+
+input ProductImageCreateInput {
+  url: String!
 }
 
 input ProductUpdateInput {
   name: String!
   description: String!
   isActive: Boolean!
+  images: [ProductImageCreateInput!]
 }

@@ -5,9 +5,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Product } from './models/product.model';
 import { ProductMutationsResolver } from './resolvers/product.mutations.resolver';
 import { ProductQueriesResolver } from './resolvers/product.queries.resolver';
+import { ProductImagesModule } from "../product-images/product-images.module";
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Product])],
+  imports: [TypeOrmModule.forFeature([Product]), ProductImagesModule],
   controllers: [ProductsController],
   providers: [
     ProductsService,

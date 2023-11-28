@@ -1,18 +1,20 @@
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import {DeepPartial, Repository} from 'typeorm';
 
 import {
   Pagination,
   PaginationArgs,
   SortDirection,
-} from './pagination/dto/pagination.dto';
+} from '../pagination/dto/pagination.dto';
 import { Type } from '@nestjs/common';
-import { PaginatedEntityModel } from './pagination/models/paginated-entity.model';
+import { PaginatedEntityModel } from '../pagination/models/paginated-entity.model';
+import {CrudCreateInput, CrudCreateOutput} from "./dto/crud-create.dto";
+import {ProductCreateInput} from "../products/dto/product-create.dto";
 
 export interface ICrudService<T> {
   readonly repository: Repository<T>;
   pagination(args: PaginationArgs): Promise<Pagination>;
-  create(inputDto: any): Promise<any>;
+  create(inputDto: CrudCreateInput): Promise<CrudCreateOutput>;
   update(id: any, inputDto: any): Promise<any>;
   delete(id: any): Promise<any>;
 }
@@ -41,9 +43,9 @@ export function CrudService<T extends PaginatedEntityModel>(
       return { data, totalCount };
     }
 
-    async create(inputDto: any): Promise<any> {
-      let model = this.repository.create(inputDto);
-      model = await this.repository.save(model);
+    async create(inputDto: CrudCreateInput): Promise<CrudCreateOutput> {
+      let model = this.repository.create(inputDto as unknown as DeepPartial<T>);
+      await model.save();
       return { [promisePropertyName]: model };
     }
 
